@@ -12,6 +12,7 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
+    "porfoliosite": "file:",
     "three": "^0.175.0"
   }
 }
