@@ -47,10 +47,10 @@ function onScroll() {
   const currScrollTop = window.scrollY;
   if(model1){
     if (currScrollTop > prevScrollTop){
-      model1.rotation.y -= 0.01;
+      model1.rotation.y -= 0.05;
     }
     else if (currScrollTop < prevScrollTop){
-      model1.rotation.y -=0.01;
+      model1.rotation.y +=0.05;
     }
   }
   prevScrollTop = currScrollTop;
@@ -67,3 +67,5 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+

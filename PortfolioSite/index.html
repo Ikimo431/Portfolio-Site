@@ -8,7 +8,7 @@
   </head>
   <body>
     <canvas id="bg"></canvas>
-
+    <button id="debug" onclick=debugLog()>Debug</button>
     <main>
       <header>
         <h1>Owen Johnston</h1>
@@ -79,5 +79,10 @@
       </section>
     </main>
     <script type="module" src="/src/main.js"></script>
+    <script>
+      function debugLog(){
+        console.log("Current scroll value = " + window.scrollY)
+      }
+    </script>
   </body>
 </html>

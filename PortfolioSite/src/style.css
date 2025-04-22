@@ -11,6 +11,13 @@ canvas {
   left: 0;
 }
 
+#debug {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+}
+
 main {
   width: 100vw;
   color: white;
@@ -49,7 +56,6 @@ header {
   color: white
 }
 
-#education {
 
-}
+
 
