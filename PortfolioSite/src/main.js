@@ -32,7 +32,7 @@ modelLoader.load('src/models/SceneTest.glb', (gltf) => {
   const model = gltf.scene
   scene.add(model)
   model1 = model;
-  model.position.set(3, -4, 15)
+  model.position.set(10, -4, 5)
   model.rotation.y = -Math.PI/3
 }, undefined, (error)=> {
   console.error(error)
@@ -42,11 +42,18 @@ const ambientLight = new THREE.AmbientLight(0x404040, 40); // soft white light
 scene.add(ambientLight);
 
 //rotation
-
+let prevScrollTop = window.scrollY;
 function onScroll() {
+  const currScrollTop = window.scrollY;
   if(model1){
-    model1.rotation.y += 0.075;
+    if (currScrollTop > prevScrollTop){
+      model1.rotation.y -= 0.01;
+    }
+    else if (currScrollTop < prevScrollTop){
+      model1.rotation.y -=0.01;
+    }
   }
+  prevScrollTop = currScrollTop;
 }
 document.body.onscroll = onScroll;
 onScroll();
