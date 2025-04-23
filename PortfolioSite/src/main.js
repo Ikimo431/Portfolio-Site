@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
 const scene = new THREE.Scene();
@@ -10,7 +11,9 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 })
 
-
+//-----CAMERA ORBIT CONTROLS 
+const controls = new OrbitControls(camera, renderer.domElement);
+console.log('OrbitControls created:', controls);
 
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -38,32 +41,34 @@ modelLoader.load('src/models/SceneTest.glb', (gltf) => {
   console.error(error)
 })
 //-----LIGTHING------------
-const ambientLight = new THREE.AmbientLight(0x404040, 40); // soft white light
+const ambientLight = new THREE.AmbientLight(0x404040, 20); // soft white light
 scene.add(ambientLight);
 
-//rotation
-let prevScrollTop = window.scrollY;
+//Camera movemenet 
+
 function onScroll() {
-  const currScrollTop = window.scrollY;
-  if(model1){
-    if (currScrollTop > prevScrollTop){
-      model1.rotation.y -= 0.05;
-    }
-    else if (currScrollTop < prevScrollTop){
-      model1.rotation.y +=0.05;
-    }
-  }
-  prevScrollTop = currScrollTop;
+
+
 }
 document.body.onscroll = onScroll;
 onScroll();
 
+//camera debug 
+const debugButton = document.getElementById('debug');
+debugButton.addEventListener('click', () => {
+  const pos = camera.position;
+  const rot = camera.rotation;
 
+  console.log(`Camera Position: x=${pos.x.toFixed(2)}, y=${pos.y.toFixed(2)}, z=${pos.z.toFixed(2)}`);
+  console.log(`Camera Rotation: x=${rot.x.toFixed(2)}, y=${rot.y.toFixed(2)}, z=${rot.z.toFixed(2)}`);
+});
 
 
 
 function animate() {
   requestAnimationFrame(animate);
+
+  controls.update();
   renderer.render(scene, camera);
 }
 animate();

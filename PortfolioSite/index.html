@@ -82,6 +82,19 @@
     <script>
       function debugLog(){
         console.log("Current scroll value = " + window.scrollY)
+        const offsetsArray = getSectionOffsets()
+        console.log(JSON.stringify(offsetsArray))
+        console.log(JSON.stringify(offsetsArray.find(section => section.id==='aboutme')))
+        document.body.style.overflow = 'hidden';
+      }
+
+      function getSectionOffsets() {
+        const sections = document.querySelectorAll('section')
+        return Array.from(sections).map(section => {
+          return {id: section.id, offset: section.offsetTop}
+      })
+
+      
       }
     </script>
   </body>
