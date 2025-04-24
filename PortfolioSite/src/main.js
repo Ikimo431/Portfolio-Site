@@ -18,12 +18,15 @@ console.log('OrbitControls created:', controls);
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
+const startCameraPos = new THREE.Vector3(0, 5, 30)
+const startCameraRot = new THREE.Euler(Math.PI, Math.PI, Math.PI)
+camera.position.copy(startCameraPos)
+camera.rotation.copy(startCameraRot)
 
 //------------------------TEXTURE BACKGROUND-----------------------
 const loader = new THREE.TextureLoader();
 const spaceTexture = loader.load(
-  'src/images/Background.jpg',
+  'src/images/gradient.png',
   () => console.log('Background loaded!'),
   undefined,
   err => console.error('Error loading texture:', err)
@@ -41,14 +44,38 @@ modelLoader.load('src/models/SceneTest.glb', (gltf) => {
   console.error(error)
 })
 //-----LIGTHING------------
-const ambientLight = new THREE.AmbientLight(0x404040, 20); // soft white light
+const ambientLight = new THREE.AmbientLight(0x404040, 25); // soft white light
 scene.add(ambientLight);
-
+let pl1 = new THREE.PointLight(0x404040, 3500)
+pl1.position.copy(new THREE.Vector3(20, 5))
 //Camera movemenet 
+let targetPosition = new THREE.Vector3()
+let targetRotation = new THREE.Euler()
+let transitioning = false
 
+function getSectionOffsets() {
+  const sections = document.querySelectorAll('section')
+  return Array.from(sections).map(section => {
+    return {id: section.id, offset: section.offsetTop}
+  })
+}
+function moveCameraToPosition(position, rotation){
+  targetPosition.copy(position)
+  targetRotation.copy(rotation)
+  transitioning = true
+}
 function onScroll() {
-
-
+  const offsets = getSectionOffsets();
+  const topOffset = 300
+  if (window.scrollY>offsets.find(section => section.id==='skills').offset-topOffset) {
+    moveCameraToPosition(new THREE.Vector3(30, .5, 25), new THREE.Euler(-0.07, 1.6, 0.15));
+  }
+  else if (window.scrollY>offsets.find(section => section.id==='education').offset - topOffset) {
+    moveCameraToPosition(new THREE.Vector3(-2, 1.10, 21), new THREE.Euler(-0.07, 0.99, 0.06));
+  }
+  else {
+    moveCameraToPosition(startCameraPos, startCameraRot)
+  }
 }
 document.body.onscroll = onScroll;
 onScroll();
@@ -67,6 +94,24 @@ debugButton.addEventListener('click', () => {
 
 function animate() {
   requestAnimationFrame(animate);
+
+  
+  if (transitioning) {
+    // Position LERP
+    camera.position.lerp(targetPosition, 0.03); // 0.05 is the lerp speed
+
+    // Rotation LERP
+    camera.rotation.x += (targetRotation.x - camera.rotation.x) * 0.05;
+    camera.rotation.y += (targetRotation.y - camera.rotation.y) * 0.05;
+    camera.rotation.z += (targetRotation.z - camera.rotation.z) * 0.05;
+
+    // Stop if close enough
+    if (camera.position.distanceTo(targetPosition) < 0.01) {
+      camera.position.copy(targetPosition);
+      camera.rotation.copy(targetRotation);
+      transitioning = false;
+    }
+  }
 
   controls.update();
   renderer.render(scene, camera);

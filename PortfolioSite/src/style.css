@@ -12,13 +12,14 @@ canvas {
   width: 100vw;
   height: 100vh;
   pointer-events: auto; 
+  z-index: 0;
 }
 
 #debug {
   position: fixed;
   left: 1rem;
   top: 1rem;
-  z-index: 100;
+  z-index: 102;
 }
 
 main {
