@@ -46,8 +46,11 @@ modelLoader.load('src/models/SceneTest.glb', (gltf) => {
 //-----LIGTHING------------
 const ambientLight = new THREE.AmbientLight(0x404040, 25); // soft white light
 scene.add(ambientLight);
-let pl1 = new THREE.PointLight(0x404040, 3500)
-pl1.position.copy(new THREE.Vector3(20, 5))
+let pl1 = new THREE.PointLight(0x404040, 100)
+pl1.position.copy(new THREE.Vector3(24, -1, 10))
+scene.add(pl1)
+//const pointLightHelper = new THREE.PointLightHelper(pl1, 1); // 1 is the size of the sphere
+//scene.add(pointLightHelper);
 //Camera movemenet 
 let targetPosition = new THREE.Vector3()
 let targetRotation = new THREE.Euler()
