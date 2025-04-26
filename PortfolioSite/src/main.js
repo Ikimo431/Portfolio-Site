@@ -12,14 +12,13 @@ const renderer = new THREE.WebGLRenderer({
 })
 
 //-----CAMERA ORBIT CONTROLS 
-const controls = new OrbitControls(camera, renderer.domElement);
-console.log('OrbitControls created:', controls);
+//const controls = new OrbitControls(camera, renderer.domElement);
 
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-const startCameraPos = new THREE.Vector3(0, 5, 30)
-const startCameraRot = new THREE.Euler(Math.PI, Math.PI, Math.PI)
+const startCameraPos = new THREE.Vector3(-8, 9.39, 33.75)
+const startCameraRot = new THREE.Euler(-0.27, 0.03, 0.01)
 camera.position.copy(startCameraPos)
 camera.rotation.copy(startCameraRot)
 
@@ -43,9 +42,7 @@ modelLoader.load('src/models/SceneTest.glb', (gltf) => {
 }, undefined, (error)=> {
   console.error(error)
 })
-//------------HELPER
-const axesHelper = new THREE.AxesHelper(5); // 5 is the length of the lines
-scene.add(axesHelper);
+
 //-----LIGTHING------------
 const ambientLight = new THREE.AmbientLight(0x404040, 25); // soft white light
 scene.add(ambientLight);
@@ -75,15 +72,12 @@ function onScroll() {
   const offsets = getSectionOffsets();
   const topOffset = 300
   if (window.scrollY>offsets.find(section => section.id==='skills').offset-topOffset) {
-    //moveCameraToPosition(new THREE.Vector3(30, .5, 25), new THREE.Euler(-0.07, 1.6, 0.15));
-    moveCameraToPosition(new THREE.Vector3(30, .5, 25), new THREE.Euler(0, 0, 0));
+   moveCameraToPosition(new THREE.Vector3(30.34, 0.09, 23.47), new THREE.Euler(-0.09, 0.89, 0.07));
   }
   else if (window.scrollY>offsets.find(section => section.id==='education').offset - topOffset) {
-   // moveCameraToPosition(new THREE.Vector3(-2, 1.10, 21), new THREE.Euler(-0.07, 0.99, 0.06));
-   moveCameraToPosition(new THREE.Vector3(-2, 1.10, 21), new THREE.Euler(0,0,0));
+   moveCameraToPosition(new THREE.Vector3(-5.03, 0.97, 20.07), new THREE.Euler(0.00, -0.26, 0));
   }
   else if (window.scrollY>offsets.find(section => section.id==='aboutme').offset - 400) {
-    //moveCameraToPosition(new THREE.Vector3(-10, 0, -10), new THREE.Euler(-0.28, -0.43, 0.12))
     moveCameraToPosition(new THREE.Vector3(-15.71, 1.16, 0.73), new THREE.Euler(-0.22, -0.68, -0.14)) //exactly from debug
   }
   else {
@@ -109,6 +103,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   if (transitioning) {
+    
     camera.position.lerp(targetPosition, 0.03);
 
     // Interpolate the rotation using quaternions
@@ -118,11 +113,11 @@ function animate() {
         camera.quaternion.angleTo(targetQuaternion) < 0.01) {
       camera.position.copy(targetPosition);
       camera.quaternion.copy(targetQuaternion);
-      //transitioning = false;
+      transitioning = false;
     }
   }
 
-  controls.update();
+  //controls.update();
   renderer.render(scene, camera);
 }
 animate();
