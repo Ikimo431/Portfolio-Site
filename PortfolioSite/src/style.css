@@ -19,7 +19,7 @@ canvas {
   position: fixed;
   left: 1rem;
   top: 1rem;
-  z-index: 102;
+  z-index: 201;
 }
 
 main {

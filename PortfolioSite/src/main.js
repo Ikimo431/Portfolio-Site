@@ -43,17 +43,21 @@ modelLoader.load('src/models/SceneTest.glb', (gltf) => {
 }, undefined, (error)=> {
   console.error(error)
 })
+//------------HELPER
+const axesHelper = new THREE.AxesHelper(5); // 5 is the length of the lines
+scene.add(axesHelper);
 //-----LIGTHING------------
 const ambientLight = new THREE.AmbientLight(0x404040, 25); // soft white light
 scene.add(ambientLight);
 let pl1 = new THREE.PointLight(0x404040, 100)
 pl1.position.copy(new THREE.Vector3(24, -1, 10))
 scene.add(pl1)
-//const pointLightHelper = new THREE.PointLightHelper(pl1, 1); // 1 is the size of the sphere
-//scene.add(pointLightHelper);
+let pl2 = new THREE.PointLight(0x404040, 2000)
+pl2.position.copy(new THREE.Vector3(2, 5, -10))
+scene.add(pl2)
 //Camera movemenet 
 let targetPosition = new THREE.Vector3()
-let targetRotation = new THREE.Euler()
+const targetQuaternion = new THREE.Quaternion();
 let transitioning = false
 
 function getSectionOffsets() {
@@ -64,17 +68,23 @@ function getSectionOffsets() {
 }
 function moveCameraToPosition(position, rotation){
   targetPosition.copy(position)
-  targetRotation.copy(rotation)
+  targetQuaternion.setFromEuler(rotation)
   transitioning = true
 }
 function onScroll() {
   const offsets = getSectionOffsets();
   const topOffset = 300
   if (window.scrollY>offsets.find(section => section.id==='skills').offset-topOffset) {
-    moveCameraToPosition(new THREE.Vector3(30, .5, 25), new THREE.Euler(-0.07, 1.6, 0.15));
+    //moveCameraToPosition(new THREE.Vector3(30, .5, 25), new THREE.Euler(-0.07, 1.6, 0.15));
+    moveCameraToPosition(new THREE.Vector3(30, .5, 25), new THREE.Euler(0, 0, 0));
   }
   else if (window.scrollY>offsets.find(section => section.id==='education').offset - topOffset) {
-    moveCameraToPosition(new THREE.Vector3(-2, 1.10, 21), new THREE.Euler(-0.07, 0.99, 0.06));
+   // moveCameraToPosition(new THREE.Vector3(-2, 1.10, 21), new THREE.Euler(-0.07, 0.99, 0.06));
+   moveCameraToPosition(new THREE.Vector3(-2, 1.10, 21), new THREE.Euler(0,0,0));
+  }
+  else if (window.scrollY>offsets.find(section => section.id==='aboutme').offset - 400) {
+    //moveCameraToPosition(new THREE.Vector3(-10, 0, -10), new THREE.Euler(-0.28, -0.43, 0.12))
+    moveCameraToPosition(new THREE.Vector3(-15.71, 1.16, 0.73), new THREE.Euler(-0.22, -0.68, -0.14)) //exactly from debug
   }
   else {
     moveCameraToPosition(startCameraPos, startCameraRot)
@@ -98,21 +108,17 @@ debugButton.addEventListener('click', () => {
 function animate() {
   requestAnimationFrame(animate);
 
-  
   if (transitioning) {
-    // Position LERP
-    camera.position.lerp(targetPosition, 0.03); // 0.05 is the lerp speed
+    camera.position.lerp(targetPosition, 0.03);
 
-    // Rotation LERP
-    camera.rotation.x += (targetRotation.x - camera.rotation.x) * 0.05;
-    camera.rotation.y += (targetRotation.y - camera.rotation.y) * 0.05;
-    camera.rotation.z += (targetRotation.z - camera.rotation.z) * 0.05;
+    // Interpolate the rotation using quaternions
+    camera.quaternion.slerp(targetQuaternion, 0.05);
 
-    // Stop if close enough
-    if (camera.position.distanceTo(targetPosition) < 0.01) {
+    if (camera.position.distanceTo(targetPosition) < 0.01 && 
+        camera.quaternion.angleTo(targetQuaternion) < 0.01) {
       camera.position.copy(targetPosition);
-      camera.rotation.copy(targetRotation);
-      transitioning = false;
+      camera.quaternion.copy(targetQuaternion);
+      //transitioning = false;
     }
   }
 
