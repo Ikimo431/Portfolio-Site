@@ -67,8 +67,6 @@ scene.add(pl2)
 let targetPosition = new THREE.Vector3()
 const targetQuaternion = new THREE.Quaternion();
 let transitioning = false
-const axesHelper = new THREE.AxesHelper(5); // 5 is the length of the lines
-scene.add(axesHelper);
 function getSectionOffsets() {
   const main = document.querySelector('main')
   const sections = document.querySelectorAll('section')
