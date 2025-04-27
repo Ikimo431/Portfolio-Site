@@ -36,7 +36,7 @@ camera.rotation.copy(startCameraRot)
 //------------------------TEXTURE BACKGROUND-----------------------
 const loader = new THREE.TextureLoader();
 const spaceTexture = loader.load(
-  'src/images/gradient.png',
+  'public/images/gradient.png',
   () => console.log('Background loaded!'),
   undefined,
   err => console.error('Error loading texture:', err)
@@ -44,7 +44,7 @@ const spaceTexture = loader.load(
 scene.background = spaceTexture
 //--------------------LOAD MODEL-----------------------------------
 var model1;
-modelLoader.load('src/models/SceneTest.glb', (gltf) => {
+modelLoader.load('public/models/SceneTest.glb', (gltf) => {
   const model = gltf.scene
   scene.add(model)
   model1 = model;
