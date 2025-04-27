@@ -8,12 +8,13 @@
   </head>
   <body>
     <canvas id="bg"></canvas>
-    <button id="debug" onclick=debugLog()>Debug</button>
+    
     <main>
       <header>
         <h1>Owen Johnston</h1>
         <p>Welcome to my portfolio!</p>
       </header>
+      <button id="debug" onclick=debugLog()>Debug</button>
 
       <section id="aboutme">
         <h2>About Me</h2>
@@ -75,11 +76,15 @@
         </ul>
       </section>
 
-      <section id = "projects">
-        <h2>Projects</h2>
-        <P>Games<p>
+      <section id = "Links">
+        <h2>Links</h2>
         <ul>
-          <li><a href="https://ikimo431.itch.io">Itch Io</a></li>
+          <p>Projects</p>
+          <li><p><a href = 'https://github.com/Ikimo431'>GitHub</a></p></li>
+          <li><p><a href="https://ikimo431.itch.io">Itch Io</a></li>
+          <p>Other</p>
+          <li><a href = 'https://www.linkedin.com/in/owen-johnston-240b85305/'>LinkedIn</a></li>
+
         </ul>
       </section>
     </main>
@@ -89,7 +94,9 @@
         console.log("Current scroll value = " + window.scrollY)
         const offsetsArray = getSectionOffsets()
         console.log(JSON.stringify(offsetsArray))
-        console.log(JSON.stringify(offsetsArray.find(section => section.id==='aboutme')))
+        const main = document.querySelector('main')
+        console.log("Current scroll value on main =" + main.scrollTop)
+
         document.body.style.overflow = 'hidden';
       }
 

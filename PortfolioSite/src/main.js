@@ -11,14 +11,25 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 })
 
-//-----CAMERA ORBIT CONTROLS 
+//-----CAMERA SETUP--------
 //const controls = new OrbitControls(camera, renderer.domElement);
-
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-const startCameraPos = new THREE.Vector3(-8, 9.39, 33.75)
-const startCameraRot = new THREE.Euler(-0.27, 0.03, 0.01)
+let startCameraPos = new THREE.Vector3();
+let startCameraRot = new THREE.Euler();
+const mobile = window.innerWidth <= 650
+if(mobile){
+  //mobile camera start pos
+  startCameraPos = new THREE.Vector3(15, 38, 50)
+  startCameraRot = new THREE.Euler(-0.27, 0.03, 0.01)
+}
+else {
+  //desktop camera start pos
+  startCameraPos = new THREE.Vector3(-8, 9.39, 33.75)
+  startCameraRot = new THREE.Euler(-0.27, 0.03, 0.01)
+}
+
 camera.position.copy(startCameraPos)
 camera.rotation.copy(startCameraRot)
 
@@ -56,11 +67,13 @@ scene.add(pl2)
 let targetPosition = new THREE.Vector3()
 const targetQuaternion = new THREE.Quaternion();
 let transitioning = false
-
+const axesHelper = new THREE.AxesHelper(5); // 5 is the length of the lines
+scene.add(axesHelper);
 function getSectionOffsets() {
+  const main = document.querySelector('main')
   const sections = document.querySelectorAll('section')
   return Array.from(sections).map(section => {
-    return {id: section.id, offset: section.offsetTop}
+    return {id: section.id, offset: (mobile? section.offsetTop-main.offsetTop : section.offsetTop)}
   })
 }
 function moveCameraToPosition(position, rotation){
@@ -68,23 +81,50 @@ function moveCameraToPosition(position, rotation){
   targetQuaternion.setFromEuler(rotation)
   transitioning = true
 }
+
+const main = document.querySelector('main')
 function onScroll() {
   const offsets = getSectionOffsets();
-  const topOffset = 300
-  if (window.scrollY>offsets.find(section => section.id==='skills').offset-topOffset) {
-   moveCameraToPosition(new THREE.Vector3(30.34, 0.09, 23.47), new THREE.Euler(-0.09, 0.89, 0.07));
-  }
-  else if (window.scrollY>offsets.find(section => section.id==='education').offset - topOffset) {
-   moveCameraToPosition(new THREE.Vector3(-5.03, 0.97, 20.07), new THREE.Euler(0.00, -0.26, 0));
-  }
-  else if (window.scrollY>offsets.find(section => section.id==='aboutme').offset - 400) {
-    moveCameraToPosition(new THREE.Vector3(-15.71, 1.16, 0.73), new THREE.Euler(-0.22, -0.68, -0.14)) //exactly from debug
-  }
-  else {
-    moveCameraToPosition(startCameraPos, startCameraRot)
-  }
+  
+  const scrollY = mobile ? main.scrollTop : window.scrollY
+    // on pc resolution
+    const topOffset = 300
+    if (scrollY>offsets.find(section => section.id==='skills').offset-topOffset) {
+      if (mobile) {
+        moveCameraToPosition(new THREE.Vector3(30, -1, 33), new THREE.Euler(.5, .27, -0.13))
+      }
+      else {
+        moveCameraToPosition(new THREE.Vector3(30.34, 0.09, 23.47), new THREE.Euler(-0.09, 0.89, 0.07));
+      } 
+    }
+    else if (scrollY>offsets.find(section => section.id==='education').offset - topOffset) {
+      if (mobile)  {
+        moveCameraToPosition(new THREE.Vector3(-8, 8, 28), new THREE.Euler(0, -0.6, 0))
+      }
+      else {
+        moveCameraToPosition(new THREE.Vector3(-5.03, 0.97, 20.07), new THREE.Euler(0.00, -0.26, 0));
+      }
+    
+    }
+    else if (scrollY>offsets.find(section => section.id==='aboutme').offset - 400) {
+      if (mobile) {
+        //startCameraPos = new THREE.Vector3(15, 38, 50)
+        //startCameraRot = new THREE.Euler(-0.27, 0.03, 0.01)
+        moveCameraToPosition(new THREE.Vector3(-20, 15, 10), new THREE.Euler(-0.1, -0.8, 0.01))
+      }
+      else {
+        moveCameraToPosition(new THREE.Vector3(-15.71, 1.16, 0.73), new THREE.Euler(-0.22, -0.68, -0.14)) //exactly from debug
+      }
+      
+    }
+    else {
+      moveCameraToPosition(startCameraPos, startCameraRot)
+    }
+   
+  
 }
 document.body.onscroll = onScroll;
+main.addEventListener('scroll', onScroll)
 onScroll();
 
 //camera debug 
@@ -95,9 +135,7 @@ debugButton.addEventListener('click', () => {
 
   console.log(`Camera Position: x=${pos.x.toFixed(2)}, y=${pos.y.toFixed(2)}, z=${pos.z.toFixed(2)}`);
   console.log(`Camera Rotation: x=${rot.x.toFixed(2)}, y=${rot.y.toFixed(2)}, z=${rot.z.toFixed(2)}`);
-});
-
-
+}); 
 
 function animate() {
   requestAnimationFrame(animate);
