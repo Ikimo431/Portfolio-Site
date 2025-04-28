@@ -2,7 +2,9 @@
 
 :root {
   --block-bg: #274a82;
-  --spacing: 300px;
+  --spacing: 25vh;
+  --mobbile-spacing: 12.5vh
+
 }
 
 canvas {
@@ -69,6 +71,7 @@ a, a:visited{
 @media (max-width: 650px) {
   section, header {
     grid-column: 1 / span 12;
+    margin-bottom: var(--mobbile-spacing)
   }
   main {
     height: 50vh; /* take up 65% of the viewport height */

@@ -1,7 +1,6 @@
 import './style.css'
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
 const scene = new THREE.Scene();
@@ -11,7 +10,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 })
 
-//-----CAMERA SETUP--------
+//-----CAMERA INITIALIZE--------
 //const controls = new OrbitControls(camera, renderer.domElement);
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -54,8 +53,8 @@ modelLoader.load('./models/SceneTest.glb', (gltf) => {
   console.error(error)
 })
 
-//-----LIGTHING------------
-const ambientLight = new THREE.AmbientLight(0x404040, 25); // soft white light
+//------------------------------LIGTHING------------------------
+const ambientLight = new THREE.AmbientLight(0x404040, 25); 
 scene.add(ambientLight);
 let pl1 = new THREE.PointLight(0x404040, 100)
 pl1.position.copy(new THREE.Vector3(24, -1, 10))
@@ -63,7 +62,9 @@ scene.add(pl1)
 let pl2 = new THREE.PointLight(0x404040, 2000)
 pl2.position.copy(new THREE.Vector3(2, 5, -10))
 scene.add(pl2)
-//Camera movemenet 
+
+
+//-----------CAM MOVEMENT SETUP-----------------
 let targetPosition = new THREE.Vector3()
 const targetQuaternion = new THREE.Quaternion();
 let transitioning = false
@@ -80,6 +81,7 @@ function moveCameraToPosition(position, rotation){
   transitioning = true
 }
 
+//---------------HANDLE CAMERA MOVEMENT ON SCROLL----------------
 const main = document.querySelector('main')
 function onScroll() {
   const offsets = getSectionOffsets();
@@ -126,6 +128,7 @@ main.addEventListener('scroll', onScroll)
 onScroll();
 
 //camera debug 
+/*
 const debugButton = document.getElementById('debug');
 debugButton.addEventListener('click', () => {
   const pos = camera.position;
@@ -133,8 +136,9 @@ debugButton.addEventListener('click', () => {
 
   console.log(`Camera Position: x=${pos.x.toFixed(2)}, y=${pos.y.toFixed(2)}, z=${pos.z.toFixed(2)}`);
   console.log(`Camera Rotation: x=${rot.x.toFixed(2)}, y=${rot.y.toFixed(2)}, z=${rot.z.toFixed(2)}`);
-}); 
+}); */
 
+//---MAIN ANIMATE FUNCTION---
 function animate() {
   requestAnimationFrame(animate);
 
