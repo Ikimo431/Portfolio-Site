@@ -1,0 +1,27 @@
+nav {
+    display: flex;
+    width: 100vw;
+    height: 5vh;
+    background-color: aquamarine;
+    justify-content: space-around;
+    position: absolute;
+    top: 0;
+    left: 0;
+    a{ 
+      border-width: .5rem;
+      flex-basis: 1;
+      background-color: #274a82;
+    
+      display: flex; 
+      align-items: center;
+    }
+  }
+  p {
+    font-weight: bold;
+    font-size: 50rem;
+  }
+  body {
+    background-color: blue;
+    width: 100vw;
+    height: 100vh;
+  }
