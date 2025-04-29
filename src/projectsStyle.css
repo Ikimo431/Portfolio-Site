@@ -1,8 +1,14 @@
+:root {
+  --nav-bg: #3e75cf;
+  --block-bg: #3e75cf;
+}
+
+
 nav {
     display: flex;
     width: 100vw;
     height: 5vh;
-    background-color: aquamarine;
+    background-color: var(--block-bg);
     justify-content: space-around;
     position: absolute;
     top: 0;
@@ -10,7 +16,7 @@ nav {
     a{ 
       border-width: .5rem;
       flex-basis: 1;
-      background-color: #274a82;
+      background-color: var(--nav-bg);
     
       display: flex; 
       align-items: center;
@@ -21,7 +27,7 @@ nav {
     font-size: 50rem;
   }
   body {
-    background-color: blue;
+    
     width: 100vw;
     height: 100vh;
   }

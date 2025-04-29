@@ -80,7 +80,7 @@ nav {
   a{ 
     border-width: .5rem;
     flex-basis: 1;
-    background-color: #274a82;
+    background-color: var(--block-bg);
     width: 50%;
     display: flex; 
     align-items: center;
