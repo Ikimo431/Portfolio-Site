@@ -80,3 +80,10 @@ body, html {
     width: 100vw;
     height: 100vh;
 }
+@media(max-width: 650px){
+  nav{
+    bottom: 0;
+    top: auto;
+    height: 10vh;
+  }
+}
