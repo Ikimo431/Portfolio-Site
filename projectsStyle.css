@@ -32,7 +32,7 @@ nav {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-image: url(/public/images/gradient.png);
+    background-image: url(./images/gradient.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;   
