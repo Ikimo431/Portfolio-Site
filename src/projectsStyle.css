@@ -24,7 +24,18 @@ nav {
   }
   p {
     font-weight: bold;
-    font-size: 50rem;
+    
+  }
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/public/images/gradient.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;   
   }
   body {
     
