@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href ='projectsStyle.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('section').hide()
+            $('article').hide()
+            $('#WebButton').click(()=>{
+                switchToSection('Web')
+            })
+            $('#GamesButton').click(()=>{
+                switchToSection('Games')
+            })
+
+            $('.projectDiv').click(function() {
+                const divID  = $(this).attr('id')
+                switchToArticle(divID)
+            })
+            
+        })
+
+    function switchToSection(sectionName) {
+        const id = "#" + sectionName
+        $(document).ready(function(){
+            $('section').hide()
+            $('article').hide()
+            $(id).slideDown() 
+        })
+    }
+
+    function switchToArticle(articleName){
+        const id = '#' + articleName + "Article"
+        console.log(id)
+        $(document).ready(()=>{
+            if ($(id).is(':visible')){
+                $(id).slideUp();
+            }
+            else {
+                $('article').slideUp()
+                $(id).slideDown()
+            }
+        })
+    }
+    </script>
+    <title>Projects </title>
+</head>
+    <body>
+        <nav>
+            <button style = "background-color: #64bce8;" id = 'WebButton'>Web</button>
+            <button style = "background-color: #f2c25a" id = 'GamesButton'>Games</button>
+          </nav>
+        <main> 
+            <section id = 'Web'>
+                <div>
+                    <img src = '' alt = "MyPantry image">
+                </div>
+                
+            </section>
+            <section id = 'Games'>
+                <div id  = "RhythmPillars" class="projectDiv">
+                    <h3>Rhythm Pillars</h3>
+                    <img src = 'images/RhythmPillars.png' alt = "RhythmPillars image">
+                </div>
+                <div id  = "Test" class="projectDiv">
+                    <h3>TestGame</h3>
+                    <img src = 'images/RhythmPillars.png' alt = "RhythmPillars image">
+                </div>
+            </section>
+
+            <article id = "RhythmPillarsArticle">
+                <h3>Project Summary</h3>
+                <ul>
+                    <li>A rhythm game with the goal of moving and hitting pillars to the beat</li>
+                </ul>
+                <h3>Technologies</h3>
+                <ul>
+                    <li>Created using GameMaker</li>
+                    <li>Scripting done in GML</li>
+                    <li>Art and animations created using LibreSprite</li>
+                    <li>Music made in LMMS and Ableton Live</li>
+                </ul>
+            </article>
+            <article id = "TestArticle">
+                <h3>Project Summary</h3>
+                <ul>
+                    <li>A test projectkjdfhaskjdghsdkghsdjklghskghskjlghskghskglhaskgjaskjglhsakghkjshgkshdgkshgkjsahgkjsahgkshg</li>
+                </ul>
+                <h3>Technologies</h3>
+                <ul>
+                    <li>something</li>
+                    <li>another thing</li>
+                </ul>
+            </article>
+        </main>
+    </body>
+</html>
