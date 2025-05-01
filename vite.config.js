@@ -1,4 +1,7 @@
-export default {
+import { defineConfig } from "vite";
+import { resolve } from "path";
+
+export default defineConfig({
     base: '/Portfolio-Site/',  
     build: {
         rollupOptions: {
@@ -7,5 +10,5 @@ export default {
             projects: resolve(__dirname, 'projects.html')
           }
         }
-      }
-};
+    }
+});
