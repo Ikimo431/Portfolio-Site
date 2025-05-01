@@ -55,6 +55,7 @@ nav {
       img {
         width: auto;
         height: 25vh;
+        max-width: 25vw;
       }
       div {
         display: flex;
@@ -64,9 +65,20 @@ nav {
         background-color: cadetblue;
       }
     }
+    section > *:only-child {
+      grid-column: 1 / -1;
+      justify-self: center;
+    }
     article {
      color: white;
      width: 50vw;
+     font-size: 1vw;
+     li {
+      margin-left: 3vw;
+     }
+     a {
+      color: white;
+     }
     }
   }
   body {
