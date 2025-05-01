@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href ='projectsStyle.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('section').hide()
+            $('article').hide()
+            $('#WebButton').click(()=>{
+                switchToSection('Web')
+            })
+            $('#GamesButton').click(()=>{
+                switchToSection('Games')
+            })
+
+            $('.projectDiv').click(function() {
+                const divID  = $(this).attr('id')
+                switchToArticle(divID)
+            })
+            
+        })
+
+    function switchToSection(sectionName) {
+        const id = "#" + sectionName
+        $(document).ready(function(){
+            $('section').hide()
+            $('article').slideUp()
+            $(id).slideDown() 
+            $('.projectDiv').show()
+        })
+    }
+
+    function switchToArticle(divID){
+        const article = "#" + divID + "Article"
+        const id = "#" + divID
+        console.log(id)
+        console.log(article)
+        $(document).ready(()=>{
+            if ($(article).is(':visible')){
+                $(article).slideUp();
+            }
+            else {
+                $('article').slideUp()
+                $('.projectDiv').slideUp()
+                $(article).slideDown()
+                $(id).slideUp()
+            }
+        })
+    }
+    </script>
+    <title>Projects </title>
+</head>
+    <body>
+        <nav>
+            <button style = "background-color: #64bce8;" id = 'WebButton'>Web</button>
+            <button style = "background-color: #f2c25a" id = 'GamesButton'>Games</button>
+          </nav>
+        <main> 
+            <section id = 'Web'>
+                <div  id = "MyPantry" class="projectDiv">
+                    <h3>MyPantry</h3>
+                    <img src = 'images/MyPantryDash.png' alt = "MyPantry image">
+                </div>
+                
+            </section>
+            <section id = 'Games'>
+                <div id  = "RhythmPillars" class="projectDiv">
+                    <h3>Rhythm Pillars</h3>
+                    <img src = 'images/RhythmPillars.png' alt = "RhythmPillars image">
+                </div>
+            </section>
+
+            <article id = "RhythmPillarsArticle">
+                <h3>Project Summary</h3>
+                <ul>
+                    <li>A rhythm game with the goal of moving and hitting pillars to the beat</li>
+                </ul>
+                <h3>Technologies</h3>
+                <ul>
+                    <li>Created using GameMaker</li>
+                    <li>Scripting done in GML</li>
+                    <li>Art and animations created using LibreSprite</li>
+                    <li>Music made in LMMS and Ableton Live</li>
+                </ul>
+                <h3><a href = 'https://ikimo431.itch.io/rhythm-pillars'>Link</a></h3>
+            </article>
+            <article id = "MyPantryArticle">
+                <h3>Project Summary (Work In Progress)</h3>
+                <ul>
+                    <li>A web application to store recipes and manage ingredients to make cooking easier</li>
+                    <li>Keep track of what ingredients you have</li>
+                    <li>Filter recipes by what you have available</li>
+                    <li>Add recipes to a shopping list in one click</li>
+                </ul>
+                <h3>Technologies</h3>
+                <ul>
+                    <li>Made use Next.js and React</li>
+                    <li>Designed database structure and created with MySQL, set up on an Ubuntu Server machine</li>
+                    <li>Implemented Rest API routes to handle database CRUD operations</li>
+                    <li>Authentication implemented using JSON Web Tokens, and Bcrypt for password hashing</li>
+                </ul>
+            </article>
+           
+        </main>
+    </body>
+</html>
