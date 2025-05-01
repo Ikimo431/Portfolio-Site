@@ -33,7 +33,7 @@ nav {
       filter: brightness(0.9)
     }
    
-  }
+}
 
 
   main {
@@ -72,7 +72,7 @@ nav {
     article {
      color: white;
      width: 50vw;
-     font-size: 1vw;
+     font-size: 1rem;
      li {
       margin-left: 3vw;
      }
@@ -97,5 +97,10 @@ body, html {
     bottom: 0;
     top: auto;
     height: 10vh;
+  }
+  main {
+      article {
+        width: 90vw
+      }
   }
 }
