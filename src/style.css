@@ -104,5 +104,8 @@ body, html {
     overflow-y: auto; 
     padding: 60px 0; 
   }
+  nav a {
+    width: 100%;
+  }
 }
 
