@@ -84,8 +84,9 @@ nav {
     align-items: center;
     justify-content: center;
     background-color: var(--block-bg);
-    width:15vw;
-    font-size: 1.2rem;
+    width: auto;
+    height: auto;
+    padding-inline: 3rem;
   }
 }
 
