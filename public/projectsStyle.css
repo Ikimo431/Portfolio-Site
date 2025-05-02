@@ -114,7 +114,13 @@ body, html {
       right: 5vw;
       height:3rem;
       width: 3rem;
-    
+      img {
+        height:auto;
+        width: auto;
+      }
+    }
+    button {
+      font-size: 1.3rem;
     }
   }
   main {
