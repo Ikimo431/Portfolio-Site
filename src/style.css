@@ -85,7 +85,6 @@ nav {
     justify-content: center;
     background-color: var(--block-bg);
     width: auto;
-    height: auto;
     padding-inline: 3rem;
   }
 }
