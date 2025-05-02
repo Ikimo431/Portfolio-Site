@@ -99,7 +99,7 @@ function onScroll() {
     }
     else if (scrollY>offsets.find(section => section.id==='education').offset - topOffset) {
       if (mobile)  {
-        moveCameraToPosition(new THREE.Vector3(-8, 8, 28), new THREE.Euler(0, -0.6, 0))
+        moveCameraToPosition(new THREE.Vector3(-8, 10, 28), new THREE.Euler(0, -0.6, 0))
       }
       else {
         moveCameraToPosition(new THREE.Vector3(-5.03, 0.97, 20.07), new THREE.Euler(0.00, -0.26, 0));

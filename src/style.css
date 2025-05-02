@@ -71,20 +71,21 @@ a, a:visited{
 nav {
   display: flex;
   width: 100vw;
-  height: 5vh;
-  background-color: var(--nav-bg);
-  justify-content: space-around;
-  position: absolute;
+  height: 7vh;
+  z-index: 500;
+ 
+  justify-content: end;
+  position: fixed;
   top: 0;
   left: 0;
-  a{ 
-    border-width: .5rem;
-    flex-basis: 1;
-    background-color: var(--block-bg);
-    width: 50%;
-    display: flex; 
+  
+  a{
+    display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--block-bg);
+    width:15vw;
+    font-size: 1.2rem;
   }
 }
 
