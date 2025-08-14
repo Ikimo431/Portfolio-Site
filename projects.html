@@ -65,6 +65,10 @@
                     <h3>MyPantry</h3>
                     <img src = 'images/MyPantryDash.png' alt = "MyPantry image">
                 </div>
+                <div  id = "RecordingScheduler" class="projectDiv">
+                    <h3>Class Recording Web Portal</h3>
+                    <img src = 'missing.png' alt = "Recording web portal image">
+                </div>
                 
             </section>
             <section id = 'Games'>
@@ -128,6 +132,35 @@
                     <li>Designed database structure and created with MySQL</li>
                     <li>Authentication implemented using JSON Web Tokens, and Bcrypt for password hashing</li>
                     <li>Utilized Docker to deploy project to an Ubuntu Server machine</li>
+                </ul>
+            </article>
+
+            <article id = "RecordingSchedulerArticle">
+                <div class = "slider-wrapper">
+                    <div class = 'slider' style = "aspect-ratio: 18/9;">
+                        <img id = 'Recorderslide-1' src = 'images/ScheduledRecordingDiagram.gif' alt = "Dataflow diagram for a scheduled recording">
+                        <img id = 'Recorderslide-2' src = 'images/AdhocRecordingDiagram.gif' alt = "Dataflow diagram for impromptu recordings">
+        
+                    </div>
+                    <div class = 'slider-nav'>
+                        <a class = "RecordingScheduler" href = "#Recorderslide-1"></a>
+                        <a class = "RecordingScheduler" href = "#Recorderslide-2"></a>
+                    </div>
+                </div>
+                
+                <h3>Project Summary</h3>
+                <ul>
+                    <li>A web portal for Carroll University staff anmd students to start and schedule recordings</li>
+                    <li>Staff and Students can schedule or start impormptu recordings</li>
+                    <li>Includes an admin panel so IT can manage recording permissions by building</li>
+                    <li>Support for dynamic routing of NDI sources to support future switch to NDI cameras</li>
+                </ul>
+                <h3>Technologies</h3>
+                <ul>
+                    <li>Made using the Next.js React frameowrk and MySQL database</li>
+                    <li>Utilized the NDI SDK to create router application in C++</li>
+                    <li>Authentication handled with orginization's SSO using Microsoft Authentication Library</li>
+                    <li>Integrated with YuJa API to handle doing the recording</li>
                 </ul>
             </article>
            
